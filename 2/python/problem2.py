@@ -1,9 +1,9 @@
 import itertools as it
 
 def even_fibs():
-    a, b = 2, 2
+    a, b = 0, 2
     while True:
-        yield b
-        a, b = b, 4 * a + b
+        yield a
+        a, b = b, 4 * b + a
 
 print(sum(it.takewhile(lambda x: x <= 40_000_000, even_fibs())))

@@ -1,7 +1,7 @@
 fn even_fibs() -> impl Iterator<Item = usize> {
-    let mut tup = (2, 2);
+    let mut tup = (0, 2);
     std::iter::from_fn(move || {
-        tup = (tup.1, 4 * tup.0 + tup.1);
+        tup = (tup.1, 4 * tup.1 + tup.0);
         Some(tup.1)
     })
 }
