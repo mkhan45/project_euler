@@ -8,7 +8,7 @@ isPrime :: Int -> Bool
 isPrime n
   | n == 1 = False
   | n `elem` [2, 3, 5] = True
-  | otherwise = not $ any (divis n) (2 : 3 : [5,11..intSqrt n])
+  | otherwise = not $ any (\i -> divis n i || divis n (i + 2)) (2 : 3 : [5,11..intSqrt n])
   where intSqrt n = ceiling $ sqrt $ fromIntegral n
 
 wheelFactor :: Int -> Int
