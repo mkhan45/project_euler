@@ -20,7 +20,7 @@ wheelFactor n = fromJust $ find ((==0) . rem n) testLS
 
 fullFactor :: (Int -> Int) -> Int -> [Int]
 fullFactor algo n 
-  | isPrime n = [n]
+  | isPrime n || n == 1 = [n]
   | otherwise = (fullFactor algo fac) ++ (fullFactor algo (n `div` fac))
   where fac = wheelFactor n
 
