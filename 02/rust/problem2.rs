@@ -1,4 +1,3 @@
-
 // an iterator of all the even fibs
 fn even_fibs() -> impl Iterator<Item = usize> {
     let mut tup = (0, 2);

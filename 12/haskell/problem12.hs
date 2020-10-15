@@ -28,12 +28,10 @@ runLenEncode (x:xs)
           (next_x, next_cnt) = head next
 
 countFactors :: Int -> Int
-countFactors n = product $ map (\(_, b) -> b + 1) factorTup
+countFactors n = product $ map ((+1) . snd) factorTup
     where factorTup = runLenEncode $ fullFactor wheelFactor n
 
 triangularNums :: [Int]
-triangularNums = 1 : helper 2 1 where
-    helper :: Int -> Int -> [Int]
-    helper i current = let next = current + i in next : helper (i + 1) next
+triangularNums = scanl (+) 1 [2..]
 
 main = putStrLn $ show $ head $ filter ((>500) . countFactors) triangularNums
