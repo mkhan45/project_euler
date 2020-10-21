@@ -4,16 +4,16 @@
 )
 
 (defun isPrime (n)
-  (if (= 1 n) (return-from isPrime nil))
-  (if (member n '(2 3 5)) (return-from isPrime T))
-  (notany (lambda (x) (or (= 0 (mod n x)) (= 0 (mod n (+ 2 x))))) (append (range (isqrt n) :start 5 :incr 6) '(2 3)))
+  (cond
+    ((<= n 1) nil)
+    ((member n '(2 3 5)) T)
+    (T (notany (lambda (x) (or (= 0 (mod n x)) (= 0 (mod n (+ 2 x))))) (append '(2 3) (range (+ 1 (isqrt n)) :start 5 :incr 6))))
+  )
 )
 
-(print (do ((x 0 (+ 1 x))
-            (cnt 0 (if (isPrime x) (+ 1 cnt) 
-                                    cnt))
-           )
+(print (do ((x 2 (+ 1 x))
+            (cnt 0 (if (isPrime x) (+ 1 cnt) cnt)))
            
-           ((= 10001 cnt) x)
+           ((= 10001 cnt) (- x 1))
        )
 )
