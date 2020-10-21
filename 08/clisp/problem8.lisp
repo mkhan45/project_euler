@@ -4,7 +4,7 @@
   (cond
     ((= 0 x) '())
     (T (multiple-value-bind (quotient remainder) (floor x 10)
-                                                 (cons remainder (digs quotient))))
+         (cons remainder (digs quotient))))
   )
 )
 
