@@ -6,6 +6,6 @@ digs x = digs (x `div` 10) ++ [fromIntegral $ x `mod` 10]
 
 maxProdLS :: Int -> [Int] -> Int
 maxProdLS _ [] = 0
-maxProdLS n ls = max (product $ take n ls) (maxProdLS n (drop 1 ls))
+maxProdLS n ls = max (product $ take n ls) (maxProdLS n (tail ls))
 
 main = putStrLn $ show $ maxProdLS 13 (digs num)
