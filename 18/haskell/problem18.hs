@@ -13,7 +13,10 @@ tri = [[75],
        [70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57],
        [91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48],
        [63, 66, 04, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31],
-       [04, 62, 98, 27, 23, 09, 70, 98, 73, 93, 38, 53, 60, 04, 23]]
+       [04, 62, 98, 27, 23, 09, 70, 98, 73, 93, 38, 53, 60, 04, 23],
+       [04, 62, 98, 27, 23, 09, 70, 98, 73, 93, 38, 53, 60, 04, 23, 22],
+       [04, 62, 98, 27, 23, 09, 70, 98, 73, 93, 38, 53, 60, 04, 23, 5, 82],
+       [04, 62, 98, 27, 23, 09, 70, 98, 73, 93, 38, 53, 60, 04, 23, 7, 95, 74]]
 -- tri = [[3],
 --        [7, 4],
 --        [2, 4, 6],
@@ -65,5 +68,16 @@ constructGraphSum = helper 0 0
             | col > row = 0
             | otherwise = tri!!row!!col + (max (helper (row + 1) col) (helper (row+1) (col+1)))
 
+-- speed speed speed
+-- although time difference doesn't matter for small triangle
+maxGraphFast :: [[Int]] -> Int
+maxGraphFast ls
+  | length ls == 2 = head $ sumRows ls
+  | otherwise = maxGraphFast (fst ++ [sumRows lst])
+                where (fst, lst) = splitAt ((length ls) - 2) ls
+                      sumRows :: [[Int]] -> [Int]
+                      sumRows [[x], [a, b]] = [x + max a b]
+                      sumRows [(x:xs), (y1:ys@(y2:_))] = x + (max y1 y2) : sumRows [xs, ys]
+
 -- main = putStrLn $ show $ maxGraphSum constructGraph
-main = putStrLn $ show constructGraphSum
+main = putStrLn $ show $ maxGraphFast tri
